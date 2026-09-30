@@ -1,0 +1,11 @@
+import React from 'react';
+
+const DashboardPage = () => {
+    return (
+        <div>
+            <h1>Welcome to your dasboard</h1>
+        </div>
+    );
+};
+
+export default DashboardPage;
