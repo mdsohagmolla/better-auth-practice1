@@ -9,7 +9,7 @@ export default function Navbar() {
   
   const {data: session, isPending}= useSession()
 
-  console.log('user session in navbar',session)
+  // console.log('user session in navbar',session)
 
   // Todo : refress dile loading dekhabe 
   if(isPending){

@@ -1,11 +1,74 @@
-import React from 'react';
+"use client";
 
-const ProfilePage = () => {
-    return (
-        <div>
-            <h1>Update your profile</h1>
-        </div>
-    );
-};
+import { updateUser } from "@/lib/auth-client";
+import {FloppyDisk} from "@gravity-ui/icons";
+import {
+  Button,
+  Description,
+  FieldError,
+  FieldGroup,
+  Fieldset,
+  Form,
+  Input,
+  Label,
+  TextArea,
+  TextField,
+} from "@heroui/react";
 
-export default ProfilePage;
+export default function ProfilePage() {
+  const handleUpdateUser = async(e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    
+
+    // Convert FormData to plain object
+    const userData = Object.fromEntries(formData.entries())
+    // console.log('in the form data ', userData)
+    
+
+    const resData = await updateUser({
+        name: userData.name
+    })
+    console.log('after submit user profile', resData)
+   
+
+    // alert("Form submitted successfully!");
+  };
+
+  return (
+    <Form className="w-full max-w-96" onSubmit={handleUpdateUser}>
+      <Fieldset>
+        <Fieldset.Legend>Profile Settings</Fieldset.Legend>
+        <Description>Update your profile information.</Description>
+        <FieldGroup>
+          <TextField
+            isRequired
+            name="name"
+            validate={(value) => {
+              if (value.length < 3) {
+                return "Name must be at least 3 characters";
+              }
+
+              return null;
+            }}
+          >
+            <Label>Name</Label>
+            <Input placeholder="John Doe" />
+            <FieldError />
+          </TextField>
+          
+          
+        </FieldGroup>
+        <Fieldset.Actions>
+          <Button type="submit">
+            <FloppyDisk />
+            Save changes
+          </Button>
+          <Button type="reset" variant="secondary">
+            Cancel
+          </Button>
+        </Fieldset.Actions>
+      </Fieldset>
+    </Form>
+  );
+}

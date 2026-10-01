@@ -20,7 +20,7 @@ const onSubmit = async(e) => {
       password: data.password
 
     })
-    console.log(resData,error)
+    console.log('after signup',resData,error)
     
     
   };
@@ -29,6 +29,8 @@ const onSubmit = async(e) => {
   const handleGoogleSignIn =async()=>{
     const resData = await signIn.social({
       provider: 'google'
+      
+
     })
     console.log('after google sign up ',resData)
 
